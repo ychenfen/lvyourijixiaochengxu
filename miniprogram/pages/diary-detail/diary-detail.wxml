@@ -1,0 +1,79 @@
+<!--日记详情页-->
+<view class="page" wx:if="{{diary}}">
+  <!-- 封面图 -->
+  <swiper class="cover-swiper" wx:if="{{diary.images && diary.images.length > 0}}" indicator-dots="{{diary.images.length > 1}}" autoplay circular>
+    <swiper-item wx:for="{{diary.images}}" wx:key="index">
+      <image class="cover-image" src="{{item}}" mode="aspectFill" bindtap="previewImage" data-url="{{item}}"></image>
+    </swiper-item>
+  </swiper>
+  <view class="cover-placeholder" wx:else>
+    <text>📔</text>
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="content-area">
+    <!-- 标题和日期 -->
+    <view class="header">
+      <text class="title">{{diary.title}}</text>
+      <text class="date">{{diary.createTimeText}}</text>
+    </view>
+
+    <!-- 位置和天气 -->
+    <view class="meta-info">
+      <view class="meta-item" wx:if="{{diary.locationName}}" bindtap="openLocation">
+        <text class="meta-icon">📍</text>
+        <text class="meta-text">{{diary.locationName}}</text>
+      </view>
+      <view class="meta-item" wx:if="{{diary.weather}}">
+        <text class="meta-icon">{{diary.weatherIcon || '🌤️'}}</text>
+        <text class="meta-text">{{diary.weather}} {{diary.temperature}}</text>
+      </view>
+    </view>
+
+    <!-- 正文内容 -->
+    <view class="content">
+      <text class="content-text">{{diary.content}}</text>
+    </view>
+
+    <!-- 图片列表 -->
+    <view class="image-grid" wx:if="{{diary.images && diary.images.length > 0}}">
+      <image 
+        class="grid-image {{diary.images.length === 1 ? 'single' : ''}}" 
+        wx:for="{{diary.images}}" 
+        wx:key="index" 
+        src="{{item}}" 
+        mode="aspectFill"
+        bindtap="previewImage"
+        data-url="{{item}}"
+      ></image>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="action-bar">
+    <view class="action-item" bindtap="editDiary">
+      <text class="action-icon">✏️</text>
+      <text class="action-text">编辑</text>
+    </view>
+    <view class="action-item" bindtap="shareDiary">
+      <text class="action-icon">📤</text>
+      <text class="action-text">分享</text>
+    </view>
+    <view class="action-item" bindtap="deleteDiary">
+      <text class="action-icon">🗑️</text>
+      <text class="action-text">删除</text>
+    </view>
+  </view>
+</view>
+
+<!-- 加载状态 -->
+<view class="loading-state" wx:elif="{{loading}}">
+  <text>加载中...</text>
+</view>
+
+<!-- 错误状态 -->
+<view class="error-state" wx:else>
+  <text class="error-icon">😕</text>
+  <text class="error-text">日记不存在或已删除</text>
+  <button class="btn btn-primary" bindtap="goBack">返回</button>
+</view>

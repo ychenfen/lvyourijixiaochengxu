@@ -1,0 +1,58 @@
+<!--地图足迹页-->
+<view class="page">
+  <!-- 地图 -->
+  <map 
+    id="footprintMap"
+    class="map"
+    latitude="{{center.latitude}}"
+    longitude="{{center.longitude}}"
+    scale="{{scale}}"
+    markers="{{markers}}"
+    show-location
+    bindmarkertap="onMarkerTap"
+    bindregionchange="onRegionChange"
+  ></map>
+
+  <!-- 统计信息 -->
+  <view class="stats-bar">
+    <view class="stat-item">
+      <text class="stat-value">{{footprints.length}}</text>
+      <text class="stat-label">足迹点</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-value">{{cities.length}}</text>
+      <text class="stat-label">城市</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-value">{{provinces.length}}</text>
+      <text class="stat-label">省份</text>
+    </view>
+  </view>
+
+  <!-- 足迹列表 -->
+  <view class="footprint-list">
+    <view class="list-header">
+      <text class="list-title">我的足迹</text>
+    </view>
+    <scroll-view scroll-y class="list-scroll">
+      <view class="footprint-item" wx:for="{{footprints}}" wx:key="id" bindtap="goToDetail" data-id="{{item.diaryId}}">
+        <view class="footprint-marker" style="background-color: {{item.color}}">
+          <text>{{index + 1}}</text>
+        </view>
+        <view class="footprint-info">
+          <text class="footprint-name">{{item.locationName}}</text>
+          <text class="footprint-date">{{item.dateText}}</text>
+        </view>
+        <text class="footprint-arrow">></text>
+      </view>
+      <view class="empty-tip" wx:if="{{footprints.length === 0}}">
+        <text>还没有足迹，快去记录旅行吧！</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 定位按钮 -->
+  <view class="location-btn" bindtap="moveToLocation">
+    <text>📍</text>
+  </view>
+</view>

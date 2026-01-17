@@ -1,0 +1,295 @@
+/* 管理员后台页样式 */
+.page {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* 顶部标签 */
+.tabs {
+  display: flex;
+  background-color: #fff;
+  border-bottom: 1rpx solid #f0f0f0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 30rpx 0;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+
+.tab.active {
+  color: #10B981;
+  font-weight: 500;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 4rpx;
+  background-color: #10B981;
+  border-radius: 2rpx;
+}
+
+/* 标签内容 */
+.tab-content {
+  padding: 20rpx;
+}
+
+/* 数据统计 */
+.stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10rpx;
+}
+
+.stats-card {
+  width: calc(50% - 20rpx);
+  margin: 10rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stats-icon {
+  font-size: 48rpx;
+  margin-bottom: 16rpx;
+}
+
+.stats-value {
+  font-size: 44rpx;
+  font-weight: bold;
+  color: #10B981;
+}
+
+.stats-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+/* 搜索栏 */
+.search-bar {
+  display: flex;
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 28rpx;
+  padding: 0 16rpx;
+}
+
+.search-btn {
+  padding: 12rpx 24rpx;
+  background-color: #10B981;
+  color: #fff;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+}
+
+/* 用户列表 */
+.user-list {
+  background-color: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.user-item:last-child {
+  border-bottom: none;
+}
+
+.user-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  background-color: #f0f0f0;
+}
+
+.user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.user-meta {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 4rpx;
+}
+
+.user-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12rpx;
+}
+
+/* 状态标签 */
+.status-tag {
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+}
+
+.status-tag.active {
+  background-color: #D1FAE5;
+  color: #10B981;
+}
+
+.status-tag.disabled {
+  background-color: #FEE2E2;
+  color: #EF4444;
+}
+
+.status-tag.warning {
+  background-color: #FEF3C7;
+  color: #F59E0B;
+}
+
+.status-tag.danger {
+  background-color: #FEE2E2;
+  color: #EF4444;
+}
+
+/* 操作按钮 */
+.action-btn {
+  padding: 8rpx 20rpx;
+  font-size: 22rpx;
+  border-radius: 8rpx;
+  background-color: #f5f5f5;
+  color: #666;
+  border: none;
+  line-height: 1.5;
+}
+
+.action-btn::after {
+  border: none;
+}
+
+.action-btn.success {
+  background-color: #D1FAE5;
+  color: #10B981;
+}
+
+.action-btn.warning {
+  background-color: #FEF3C7;
+  color: #F59E0B;
+}
+
+.action-btn.danger {
+  background-color: #FEE2E2;
+  color: #EF4444;
+}
+
+/* 筛选栏 */
+.filter-bar {
+  display: flex;
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.filter-item {
+  padding: 12rpx 24rpx;
+  font-size: 26rpx;
+  color: #666;
+  border-radius: 20rpx;
+  margin-right: 16rpx;
+}
+
+.filter-item.active {
+  background-color: #D1FAE5;
+  color: #10B981;
+}
+
+/* 日记列表 */
+.diary-list {
+  background-color: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.diary-item {
+  padding: 24rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.diary-item:last-child {
+  border-bottom: none;
+}
+
+.diary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.diary-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  flex: 1;
+}
+
+.diary-content {
+  font-size: 26rpx;
+  color: #666;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 12rpx;
+}
+
+.diary-meta {
+  display: flex;
+  gap: 24rpx;
+  font-size: 22rpx;
+  color: #999;
+  margin-bottom: 16rpx;
+}
+
+.diary-actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+/* 空提示 */
+.empty-tip {
+  padding: 60rpx;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+}

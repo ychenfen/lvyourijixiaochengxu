@@ -1,0 +1,244 @@
+/* 天气查询页样式 */
+.page {
+  padding: 20rpx;
+  padding-bottom: 40rpx;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #10B981 0%, #059669 50%, #f5f5f5 50%);
+}
+
+/* 城市选择 */
+.city-section {
+  margin-bottom: 30rpx;
+}
+
+.current-city {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx;
+}
+
+.city-icon {
+  font-size: 32rpx;
+  margin-right: 10rpx;
+}
+
+.city-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+.city-arrow {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+  margin-left: 10rpx;
+}
+
+.hot-cities {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16rpx;
+  padding: 0 20rpx;
+}
+
+.hot-city {
+  padding: 12rpx 24rpx;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 30rpx;
+  font-size: 26rpx;
+  color: #fff;
+}
+
+.hot-city.active {
+  background-color: #fff;
+  color: #10B981;
+}
+
+/* 当前天气 */
+.current-weather {
+  background-color: #fff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.weather-icon {
+  font-size: 100rpx;
+  margin-right: 30rpx;
+}
+
+.weather-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.temperature {
+  font-size: 72rpx;
+  font-weight: bold;
+  color: #333;
+  line-height: 1;
+}
+
+.description {
+  font-size: 32rpx;
+  color: #666;
+  margin-top: 8rpx;
+}
+
+.weather-details {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 30rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detail-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.detail-value {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.weather-loading {
+  background-color: #fff;
+  border-radius: 24rpx;
+  padding: 80rpx;
+  margin-bottom: 20rpx;
+  text-align: center;
+  color: #999;
+}
+
+/* 7天预报 */
+.forecast-section {
+  background-color: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 24rpx;
+}
+
+.forecast-scroll {
+  white-space: nowrap;
+}
+
+.forecast-list {
+  display: inline-flex;
+}
+
+.forecast-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  min-width: 140rpx;
+}
+
+.forecast-day {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.forecast-date {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 4rpx;
+}
+
+.forecast-icon {
+  font-size: 48rpx;
+  margin: 16rpx 0;
+}
+
+.forecast-desc {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.forecast-temp {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 12rpx;
+}
+
+.temp-high {
+  font-size: 26rpx;
+  color: #EF4444;
+}
+
+.temp-low {
+  font-size: 26rpx;
+  color: #3B82F6;
+}
+
+/* 旅行建议 */
+.tips-section {
+  background-color: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+}
+
+.tips-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.tip-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.tip-item:last-child {
+  border-bottom: none;
+}
+
+.tip-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+}
+
+.tip-content {
+  flex: 1;
+}
+
+.tip-title {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.tip-desc {
+  font-size: 26rpx;
+  color: #666;
+}

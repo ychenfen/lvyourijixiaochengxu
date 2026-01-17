@@ -1,0 +1,67 @@
+<!--日记编辑页-->
+<view class="page">
+  <!-- 标题输入 -->
+  <view class="form-item">
+    <input class="title-input" placeholder="输入日记标题" value="{{title}}" bindinput="onTitleInput" maxlength="50"/>
+    <text class="char-count">{{title.length}}/50</text>
+  </view>
+
+  <!-- 内容输入 -->
+  <view class="form-item">
+    <textarea 
+      class="content-input" 
+      placeholder="记录你的旅行故事..." 
+      value="{{content}}" 
+      bindinput="onContentInput"
+      maxlength="5000"
+      auto-height
+    ></textarea>
+    <text class="char-count">{{content.length}}/5000</text>
+  </view>
+
+  <!-- 图片上传 -->
+  <view class="form-item">
+    <view class="section-title">
+      <text>添加图片</text>
+      <text class="text-gray text-sm">（最多9张）</text>
+    </view>
+    <view class="image-upload">
+      <view class="image-item" wx:for="{{images}}" wx:key="index">
+        <image class="uploaded-image" src="{{item}}" mode="aspectFill" bindtap="previewImage" data-index="{{index}}"></image>
+        <view class="delete-btn" catchtap="deleteImage" data-index="{{index}}">×</view>
+      </view>
+      <view class="add-image" bindtap="chooseImage" wx:if="{{images.length < 9}}">
+        <text class="add-icon">+</text>
+        <text class="add-text">添加图片</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 位置选择 -->
+  <view class="form-item" bindtap="chooseLocation">
+    <view class="location-picker">
+      <text class="picker-icon">📍</text>
+      <text class="picker-text {{location ? '' : 'placeholder'}}">{{location.name || '选择位置'}}</text>
+      <text class="picker-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 天气信息 -->
+  <view class="form-item">
+    <view class="weather-info" wx:if="{{weather}}">
+      <text class="weather-icon">{{weather.icon}}</text>
+      <text class="weather-text">{{weather.description}} {{weather.temperature}}°C</text>
+      <text class="weather-auto">自动获取</text>
+    </view>
+    <view class="weather-loading" wx:else>
+      <text>正在获取天气信息...</text>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-area">
+    <button class="btn btn-primary btn-block" bindtap="saveDiary" disabled="{{saving}}">
+      {{saving ? '保存中...' : (isEdit ? '保存修改' : '发布日记')}}
+    </button>
+  </view>
+</view>

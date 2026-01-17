@@ -1,0 +1,80 @@
+<!--首页-->
+<view class="page">
+  <!-- 顶部天气卡片 -->
+  <view class="weather-card" wx:if="{{weather}}">
+    <view class="weather-bg">
+      <view class="weather-content">
+        <view class="weather-left">
+          <text class="weather-icon">{{weather.icon}}</text>
+          <view class="weather-info">
+            <text class="temperature">{{weather.temperature}}°C</text>
+            <text class="weather-desc">{{weather.description}}</text>
+          </view>
+        </view>
+        <view class="weather-right">
+          <text class="location-name">{{weather.city || '当前位置'}}</text>
+          <text class="weather-detail">湿度 {{weather.humidity}}% · 风速 {{weather.windSpeed}}m/s</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="weather-card weather-loading" wx:else>
+    <text class="text-white">正在获取天气信息...</text>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="feature-grid">
+    <view class="feature-item" bindtap="goToDiaryEdit">
+      <view class="feature-icon bg-green">
+        <text>📝</text>
+      </view>
+      <text class="feature-text">写日记</text>
+    </view>
+    <view class="feature-item" bindtap="goToFootprints">
+      <view class="feature-icon bg-blue">
+        <text>🗺️</text>
+      </view>
+      <text class="feature-text">足迹地图</text>
+    </view>
+    <view class="feature-item" bindtap="goToWeather">
+      <view class="feature-icon bg-orange">
+        <text>🌤️</text>
+      </view>
+      <text class="feature-text">天气查询</text>
+    </view>
+    <view class="feature-item" bindtap="goToNearby">
+      <view class="feature-icon bg-purple">
+        <text>📍</text>
+      </view>
+      <text class="feature-text">附近推荐</text>
+    </view>
+  </view>
+
+  <!-- 最新日记 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">最新日记</text>
+      <text class="section-more" bindtap="goToDiaryList">查看全部 ></text>
+    </view>
+    
+    <view class="diary-list" wx:if="{{diaries.length > 0}}">
+      <view class="diary-item" wx:for="{{diaries}}" wx:key="id" bindtap="goToDiaryDetail" data-id="{{item.id}}">
+        <image class="diary-cover" src="{{item.coverImage || '/images/default-cover.png'}}" mode="aspectFill"></image>
+        <view class="diary-info">
+          <text class="diary-title">{{item.title}}</text>
+          <text class="diary-summary">{{item.summary}}</text>
+          <view class="diary-meta">
+            <text class="diary-location" wx:if="{{item.locationName}}">📍 {{item.locationName}}</text>
+            <text class="diary-date">{{item.createTimeText}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="empty-state" wx:else>
+      <text class="empty-icon">📔</text>
+      <text class="empty-text">还没有日记，快去记录你的旅行吧！</text>
+      <button class="btn btn-primary" bindtap="goToDiaryEdit">写第一篇日记</button>
+    </view>
+  </view>
+</view>

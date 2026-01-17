@@ -1,0 +1,98 @@
+<!--个人中心页-->
+<view class="page">
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-info" wx:if="{{userInfo}}">
+      <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <view class="user-detail">
+        <text class="nickname">{{userInfo.nickName || '旅行者'}}</text>
+        <text class="user-id">ID: {{userInfo.openId || '未知'}}</text>
+      </view>
+    </view>
+    <view class="user-info" wx:else bindtap="login">
+      <view class="avatar avatar-placeholder">
+        <text>👤</text>
+      </view>
+      <view class="user-detail">
+        <text class="nickname">点击登录</text>
+        <text class="user-id">登录后享受更多功能</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 统计数据 -->
+  <view class="stats-card">
+    <view class="stat-item" bindtap="goToDiaryList">
+      <text class="stat-value">{{stats.diaryCount}}</text>
+      <text class="stat-label">日记</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item" bindtap="goToFootprints">
+      <text class="stat-value">{{stats.footprintCount}}</text>
+      <text class="stat-label">足迹</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-value">{{stats.cityCount}}</text>
+      <text class="stat-label">城市</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-card">
+    <view class="menu-item" bindtap="goToDiaryList">
+      <text class="menu-icon">📔</text>
+      <text class="menu-text">我的日记</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToFootprints">
+      <text class="menu-icon">🗺️</text>
+      <text class="menu-text">我的足迹</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToWeather">
+      <text class="menu-icon">🌤️</text>
+      <text class="menu-text">天气查询</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToNearby">
+      <text class="menu-icon">📍</text>
+      <text class="menu-text">附近推荐</text>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 其他功能 -->
+  <view class="menu-card">
+    <view class="menu-item" bindtap="goToAdmin" wx:if="{{isAdmin}}">
+      <text class="menu-icon">⚙️</text>
+      <text class="menu-text">管理后台</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="showAbout">
+      <text class="menu-icon">ℹ️</text>
+      <text class="menu-text">关于我们</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="feedback">
+      <text class="menu-icon">💬</text>
+      <text class="menu-text">意见反馈</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="clearCache">
+      <text class="menu-icon">🗑️</text>
+      <text class="menu-text">清除缓存</text>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="logout-btn" bindtap="logout" wx:if="{{userInfo}}">
+    <text>退出登录</text>
+  </view>
+
+  <!-- 版本信息 -->
+  <view class="version">
+    <text>旅游日记 v1.0.0</text>
+  </view>
+</view>

@@ -1,0 +1,62 @@
+<!--日记列表页-->
+<view class="page">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <text class="search-icon">🔍</text>
+      <input class="search-input" placeholder="搜索日记标题或内容" value="{{searchKeyword}}" bindinput="onSearchInput" bindconfirm="onSearch"/>
+    </view>
+  </view>
+
+  <!-- 日记列表 -->
+  <view class="diary-list" wx:if="{{diaries.length > 0}}">
+    <view class="diary-card" wx:for="{{diaries}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <!-- 封面图 -->
+      <image class="diary-cover" wx:if="{{item.coverImage}}" src="{{item.coverImage}}" mode="aspectFill"></image>
+      <view class="diary-cover diary-cover-placeholder" wx:else>
+        <text>📔</text>
+      </view>
+      
+      <!-- 内容 -->
+      <view class="diary-content">
+        <view class="diary-header">
+          <text class="diary-title">{{item.title}}</text>
+          <text class="diary-date">{{item.createTimeText}}</text>
+        </view>
+        <text class="diary-summary">{{item.summary}}</text>
+        <view class="diary-footer">
+          <view class="diary-location" wx:if="{{item.locationName}}">
+            <text class="location-icon">📍</text>
+            <text class="location-text">{{item.locationName}}</text>
+          </view>
+          <view class="diary-weather" wx:if="{{item.weather}}">
+            <text>{{item.weather}} {{item.temperature}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:elif="{{!loading}}">
+    <text class="empty-icon">📝</text>
+    <text class="empty-text">{{searchKeyword ? '没有找到相关日记' : '还没有日记，快去记录旅行吧！'}}</text>
+    <button class="btn btn-primary" bindtap="goToEdit" wx:if="{{!searchKeyword}}">写第一篇日记</button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{hasMore && diaries.length > 0}}">
+    <text wx:if="{{loadingMore}}">加载中...</text>
+    <text wx:else bindtap="loadMore">加载更多</text>
+  </view>
+
+  <!-- 写日记按钮 -->
+  <view class="fab" bindtap="goToEdit">
+    <text>+</text>
+  </view>
+</view>

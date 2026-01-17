@@ -1,0 +1,124 @@
+<!--管理员后台页-->
+<view class="page">
+  <!-- 顶部标签 -->
+  <view class="tabs">
+    <view class="tab {{activeTab === 'stats' ? 'active' : ''}}" bindtap="switchTab" data-tab="stats">数据统计</view>
+    <view class="tab {{activeTab === 'users' ? 'active' : ''}}" bindtap="switchTab" data-tab="users">用户管理</view>
+    <view class="tab {{activeTab === 'content' ? 'active' : ''}}" bindtap="switchTab" data-tab="content">内容审核</view>
+  </view>
+
+  <!-- 数据统计 -->
+  <view class="tab-content" wx:if="{{activeTab === 'stats'}}">
+    <view class="stats-grid">
+      <view class="stats-card">
+        <text class="stats-icon">👥</text>
+        <text class="stats-value">{{stats.totalUsers}}</text>
+        <text class="stats-label">总用户数</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-icon">📔</text>
+        <text class="stats-value">{{stats.totalDiaries}}</text>
+        <text class="stats-label">总日记数</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-icon">📍</text>
+        <text class="stats-value">{{stats.totalFootprints}}</text>
+        <text class="stats-label">总足迹数</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-icon">📅</text>
+        <text class="stats-value">{{stats.todayDiaries}}</text>
+        <text class="stats-label">今日新增日记</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-icon">🆕</text>
+        <text class="stats-value">{{stats.todayUsers}}</text>
+        <text class="stats-label">今日新增用户</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-icon">🔥</text>
+        <text class="stats-value">{{stats.activeUsers}}</text>
+        <text class="stats-label">活跃用户</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 用户管理 -->
+  <view class="tab-content" wx:if="{{activeTab === 'users'}}">
+    <!-- 搜索栏 -->
+    <view class="search-bar">
+      <input class="search-input" placeholder="搜索用户" value="{{userSearch}}" bindinput="onUserSearchInput"/>
+      <text class="search-btn" bindtap="searchUsers">搜索</text>
+    </view>
+    
+    <!-- 用户列表 -->
+    <view class="user-list">
+      <view class="user-item" wx:for="{{users}}" wx:key="id">
+        <image class="user-avatar" src="{{item.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+        <view class="user-info">
+          <text class="user-name">{{item.name || '未知用户'}}</text>
+          <text class="user-meta">注册时间：{{item.createdAt}}</text>
+          <text class="user-meta">日记数：{{item.diaryCount}}</text>
+        </view>
+        <view class="user-actions">
+          <view class="status-tag {{item.status === 'active' ? 'active' : 'disabled'}}">
+            {{item.status === 'active' ? '正常' : '已禁用'}}
+          </view>
+          <button 
+            class="action-btn {{item.status === 'active' ? 'danger' : 'success'}}" 
+            bindtap="toggleUserStatus" 
+            data-id="{{item.id}}"
+            data-status="{{item.status}}"
+          >
+            {{item.status === 'active' ? '禁用' : '启用'}}
+          </button>
+        </view>
+      </view>
+      <view class="empty-tip" wx:if="{{users.length === 0}}">
+        <text>暂无用户数据</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 内容审核 -->
+  <view class="tab-content" wx:if="{{activeTab === 'content'}}">
+    <!-- 筛选 -->
+    <view class="filter-bar">
+      <view class="filter-item {{contentFilter === 'all' ? 'active' : ''}}" bindtap="setContentFilter" data-filter="all">全部</view>
+      <view class="filter-item {{contentFilter === 'pending' ? 'active' : ''}}" bindtap="setContentFilter" data-filter="pending">待审核</view>
+      <view class="filter-item {{contentFilter === 'blocked' ? 'active' : ''}}" bindtap="setContentFilter" data-filter="blocked">已屏蔽</view>
+    </view>
+    
+    <!-- 日记列表 -->
+    <view class="diary-list">
+      <view class="diary-item" wx:for="{{diaries}}" wx:key="id">
+        <view class="diary-header">
+          <text class="diary-title">{{item.title}}</text>
+          <view class="status-tag {{item.status === 'normal' ? 'active' : item.status === 'pending' ? 'warning' : 'danger'}}">
+            {{item.status === 'normal' ? '正常' : item.status === 'pending' ? '待审核' : '已屏蔽'}}
+          </view>
+        </view>
+        <text class="diary-content">{{item.content}}</text>
+        <view class="diary-meta">
+          <text>作者：{{item.authorName}}</text>
+          <text>发布时间：{{item.createdAt}}</text>
+        </view>
+        <view class="diary-actions">
+          <button class="action-btn" bindtap="viewDiary" data-id="{{item.id}}">查看</button>
+          <button 
+            class="action-btn {{item.status === 'blocked' ? 'success' : 'warning'}}" 
+            bindtap="toggleDiaryStatus" 
+            data-id="{{item.id}}"
+            data-status="{{item.status}}"
+          >
+            {{item.status === 'blocked' ? '恢复' : '屏蔽'}}
+          </button>
+          <button class="action-btn danger" bindtap="deleteDiary" data-id="{{item.id}}">删除</button>
+        </view>
+      </view>
+      <view class="empty-tip" wx:if="{{diaries.length === 0}}">
+        <text>暂无日记数据</text>
+      </view>
+    </view>
+  </view>
+</view>

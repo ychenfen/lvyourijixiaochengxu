@@ -1,0 +1,101 @@
+<!--天气查询页-->
+<view class="page">
+  <!-- 城市选择 -->
+  <view class="city-section">
+    <view class="current-city" bindtap="chooseCity">
+      <text class="city-icon">📍</text>
+      <text class="city-name">{{currentCity}}</text>
+      <text class="city-arrow">▼</text>
+    </view>
+    <view class="hot-cities">
+      <view 
+        class="hot-city {{currentCity === item.name ? 'active' : ''}}" 
+        wx:for="{{hotCities}}" 
+        wx:key="name"
+        bindtap="selectCity"
+        data-city="{{item}}"
+      >
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 当前天气 -->
+  <view class="current-weather" wx:if="{{weather}}">
+    <view class="weather-main">
+      <text class="weather-icon">{{weather.icon}}</text>
+      <view class="weather-info">
+        <text class="temperature">{{weather.temperature}}°C</text>
+        <text class="description">{{weather.description}}</text>
+      </view>
+    </view>
+    <view class="weather-details">
+      <view class="detail-item">
+        <text class="detail-label">体感温度</text>
+        <text class="detail-value">{{weather.feelsLike}}°C</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">湿度</text>
+        <text class="detail-value">{{weather.humidity}}%</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">风速</text>
+        <text class="detail-value">{{weather.windSpeed}}m/s</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">气压</text>
+        <text class="detail-value">{{weather.pressure}}hPa</text>
+      </view>
+    </view>
+  </view>
+  <view class="weather-loading" wx:else>
+    <text>正在获取天气信息...</text>
+  </view>
+
+  <!-- 7天预报 -->
+  <view class="forecast-section" wx:if="{{forecast.length > 0}}">
+    <view class="section-title">7天天气预报</view>
+    <scroll-view scroll-x class="forecast-scroll">
+      <view class="forecast-list">
+        <view class="forecast-item" wx:for="{{forecast}}" wx:key="date">
+          <text class="forecast-day">{{item.dayText}}</text>
+          <text class="forecast-date">{{item.dateText}}</text>
+          <text class="forecast-icon">{{item.icon}}</text>
+          <text class="forecast-desc">{{item.description}}</text>
+          <view class="forecast-temp">
+            <text class="temp-high">{{item.tempMax}}°</text>
+            <text class="temp-low">{{item.tempMin}}°</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 旅行建议 -->
+  <view class="tips-section" wx:if="{{weather}}">
+    <view class="section-title">旅行建议</view>
+    <view class="tips-list">
+      <view class="tip-item">
+        <text class="tip-icon">👕</text>
+        <view class="tip-content">
+          <text class="tip-title">穿衣指数</text>
+          <text class="tip-desc">{{tips.clothing}}</text>
+        </view>
+      </view>
+      <view class="tip-item">
+        <text class="tip-icon">☂️</text>
+        <view class="tip-content">
+          <text class="tip-title">雨伞指数</text>
+          <text class="tip-desc">{{tips.umbrella}}</text>
+        </view>
+      </view>
+      <view class="tip-item">
+        <text class="tip-icon">🏃</text>
+        <view class="tip-content">
+          <text class="tip-title">运动指数</text>
+          <text class="tip-desc">{{tips.sport}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

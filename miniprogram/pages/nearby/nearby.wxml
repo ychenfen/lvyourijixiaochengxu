@@ -1,0 +1,70 @@
+<!--附近推荐页-->
+<view class="page">
+  <!-- 分类标签 -->
+  <view class="category-tabs">
+    <view 
+      class="tab-item {{category === 'all' ? 'active' : ''}}" 
+      bindtap="switchCategory" 
+      data-category="all"
+    >全部</view>
+    <view 
+      class="tab-item {{category === 'restaurant' ? 'active' : ''}}" 
+      bindtap="switchCategory" 
+      data-category="restaurant"
+    >🍽️ 餐厅</view>
+    <view 
+      class="tab-item {{category === 'hotel' ? 'active' : ''}}" 
+      bindtap="switchCategory" 
+      data-category="hotel"
+    >🏨 酒店</view>
+    <view 
+      class="tab-item {{category === 'scenic' ? 'active' : ''}}" 
+      bindtap="switchCategory" 
+      data-category="scenic"
+    >🏞️ 景点</view>
+  </view>
+
+  <!-- 商户列表 -->
+  <view class="place-list" wx:if="{{places.length > 0}}">
+    <view class="place-card" wx:for="{{places}}" wx:key="id">
+      <image class="place-image" src="{{item.image || '/images/default-place.png'}}" mode="aspectFill"></image>
+      <view class="place-info">
+        <view class="place-header">
+          <text class="place-name">{{item.name}}</text>
+          <view class="place-rating">
+            <text class="rating-star">⭐</text>
+            <text class="rating-value">{{item.rating}}</text>
+          </view>
+        </view>
+        <view class="place-tags">
+          <text class="tag">{{item.categoryText}}</text>
+          <text class="tag" wx:if="{{item.priceLevel}}">{{item.priceLevel}}</text>
+        </view>
+        <text class="place-address">📍 {{item.address}}</text>
+        <view class="place-distance">
+          <text>距离 {{item.distance}}</text>
+        </view>
+        <view class="place-actions">
+          <button class="action-btn" bindtap="callPhone" data-phone="{{item.phone}}" wx:if="{{item.phone}}">
+            📞 电话
+          </button>
+          <button class="action-btn primary" bindtap="navigate" data-place="{{item}}">
+            🧭 导航
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:elif="{{!loading}}">
+    <text class="empty-icon">📍</text>
+    <text class="empty-text">附近暂无{{categoryText}}推荐</text>
+    <button class="btn btn-outline" bindtap="refreshLocation">刷新位置</button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>正在搜索附近商户...</text>
+  </view>
+</view>
